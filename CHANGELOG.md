@@ -4,7 +4,7 @@ Todos los cambios importantes de este proyecto. El formato sigue
 [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y las versiones siguen
 [Semantic Versioning](https://semver.org/lang/es/).
 
-## [Sin publicar]
+## [5.2.0] - 2026-11-11
 
 ### Agregado
 - Íconos del sistema de diseño v6.3: SVG propios de trazo fino que toman el color del tema, en los botones

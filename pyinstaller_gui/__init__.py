@@ -5,7 +5,7 @@ Autor: EstebanKZL
 """
 
 APP_NAME      = "PyInstaller GUI - PRO Builder"
-APP_VERSION   = "V5.1.0"
+APP_VERSION   = "V5.2.0"
 APP_DEVELOPER = "EstebanKZL"
 APP_URL       = "https://github.com/EstebanKZL/PyInstaller_GUI"
 VERSION = APP_VERSION

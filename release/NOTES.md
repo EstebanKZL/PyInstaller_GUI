@@ -1,4 +1,4 @@
-## PyInstaller GUI - PRO Builder 5.1.0
+## PyInstaller GUI - PRO Builder 5.2.0
 
 Compilador visual para PyInstaller y Nuitka: análisis de dependencias e imports, entorno aislado,
 instaladores (Inno Setup, NSIS, AppImage), firma de código, paquete de release y generador de GitHub Actions.
@@ -6,21 +6,25 @@ Interfaz con tema oscuro (Grafito) y claro (Papel), en español e inglés.
 
 ### Novedades
 
-- **Nuitka** como segundo compilador (*Principal → Compilador*): binario nativo, sin `.py` ni `.pyc` legibles.
-- Artefactos con nombres `<App>-<versión>-<sistema>-<arq>-<variante>.<ext>` y `SHA256SUMS.txt`.
+- **Íconos** del sistema de diseño en botones, menús, búsqueda del log y proyectos recientes.
+- **Acerca de** nuevo, con un botón para copiar los datos del sistema al reportar un problema.
+- **Registro a archivo** y captura de errores: un error inesperado se muestra y queda anotado, sin cerrar el programa.
+- Corregido: el nombre de la pestaña activa se cortaba.
+- Desde 5.1.0: **Nuitka** como segundo compilador, confirmación antes de ejecutar un Python del proyecto o de
+  un perfil, y artefactos con nombres `<App>-<versión>-<sistema>-<arq>-<variante>.<ext>`.
 
 ### Descargas
 
 | Sistema | Arquitectura | Instalable | Portable |
 |---|---|---|---|
-| Windows 10 / 11 | 64 bits | `PyInstallerGUI-5.1.0-win-x64-setup.exe` | `PyInstallerGUI-5.1.0-win-x64-portable.zip` |
-| Windows 7 / 8 | 64 bits | `PyInstallerGUI-5.1.0-win7-x64-setup.exe` | `PyInstallerGUI-5.1.0-win7-x64-portable.zip` |
-| Windows 7 / 8 / 10 / 11 | 32 bits | `PyInstallerGUI-5.1.0-win7-x86-setup.exe` | `PyInstallerGUI-5.1.0-win7-x86-portable.zip` |
-| Linux | x86_64 | `PyInstallerGUI-5.1.0-linux-x86_64.AppImage` | — |
+| Windows 10 / 11 | 64 bits | `PyInstallerGUI-5.2.0-win-x64-setup.exe` | `PyInstallerGUI-5.2.0-win-x64-portable.zip` |
+| Windows 7 / 8 | 64 bits | `PyInstallerGUI-5.2.0-win7-x64-setup.exe` | `PyInstallerGUI-5.2.0-win7-x64-portable.zip` |
+| Windows 7 / 8 / 10 / 11 | 32 bits | `PyInstallerGUI-5.2.0-win7-x86-setup.exe` | `PyInstallerGUI-5.2.0-win7-x86-portable.zip` |
+| Linux | x86_64 | `PyInstallerGUI-5.2.0-linux-x86_64.AppImage` | — |
 
 - **Instalable (Windows):** asistente de Inno Setup con accesos directos, entrada en «Agregar o quitar programas» y desinstalador.
 - **Portable (Windows):** descomprimí y ejecutá `PyInstallerGUI.exe`. No instala nada.
-- **AppImage (Linux):** `chmod +x PyInstallerGUI-5.1.0-linux-x86_64.AppImage` y ejecutalo.
+- **AppImage (Linux):** `chmod +x PyInstallerGUI-5.2.0-linux-x86_64.AppImage` y ejecutalo.
 - Verificá la descarga con `SHA256SUMS.txt` (`sha256sum -c SHA256SUMS.txt`).
 
 ### Notas de compatibilidad
