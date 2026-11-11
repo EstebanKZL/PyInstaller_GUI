@@ -77,11 +77,18 @@ def make_section(text: str) -> QLabel:
     return make_label(text.upper(), "lblSection")
 
 
-def make_button(text: str, name: str = None, clicked=None, help_key: str = None, shortcut: str = None) -> QPushButton:
-    """name: btnPrimary | btnSecondary | btnStart | btnStop | btnTable | None (neutro)."""
+def make_button(text: str, name: str = None, clicked=None, help_key: str = None, shortcut: str = None,
+                icon_name=None) -> QPushButton:
+    """name: btnPrimary | btnSecondary | btnStart | btnStop | btnTable | None (neutro).
+    icon_name: ícono del catálogo; por defecto el de la acción (ACTION_ICONS[help_key]); False = sin ícono."""
+    from .icons import ACTION_ICONS, set_button_icon   # import local: icons depende de theme
     b = QPushButton(text)
     if name:
         b.setObjectName(name)
+    if icon_name is None:
+        icon_name = ACTION_ICONS.get(help_key)
+    if icon_name:
+        set_button_icon(b, icon_name)
     if clicked is not None:
         b.clicked.connect(clicked)
     if help_key:

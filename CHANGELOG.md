@@ -4,6 +4,21 @@ Todos los cambios importantes de este proyecto. El formato sigue
 [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y las versiones siguen
 [Semantic Versioning](https://semver.org/lang/es/).
 
+## [Sin publicar]
+
+### Agregado
+- Íconos del sistema de diseño v6.3: SVG propios de trazo fino que toman el color del tema, en los botones
+  de acciones universales (abrir, guardar, copiar, buscar, añadir, eliminar, actualizar, compilar), en los
+  menús, en el campo de búsqueda del log y en los proyectos recientes.
+- Registro a archivo con rotación (`PyInstallerGUI.log`, 2 MB × 3) y captura de errores no controlados: se
+  anotan con su traceback y se muestran en un diálogo sin cerrar el programa.
+- Nuevo *Acerca de* con versión, Qt, Python, sistema y ruta del registro, y un botón para copiar esos datos.
+
+### Corregido
+- El nombre de la pestaña activa se cortaba (se veía «rincipal», «istribució»): la negrita la hacía más
+  ancha que el espacio calculado.
+- El aviso «sin proyectos recientes» no pasaba por la traducción.
+
 ## [5.1.0] - 2026-11-11
 
 ### Agregado

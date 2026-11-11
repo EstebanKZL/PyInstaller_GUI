@@ -9,6 +9,19 @@ Si se necesita una clase nueva, agregarla en LOS DOS bloques try.
 """
 
 
+def _optional_svg(backend):
+    """QtSvg es opcional: sin él los íconos quedan vacíos pero el programa funciona.
+    Imports estáticos a propósito: PyInstaller y Nuitka solo empaquetan lo que ven importado."""
+    try:
+        if backend == "PySide6":
+            from PySide6.QtSvg import QSvgRenderer
+        else:
+            from PySide2.QtSvg import QSvgRenderer
+        return QSvgRenderer
+    except ImportError:
+        return None
+
+
 def _import_qt():
     errors = []
 
@@ -31,6 +44,7 @@ def _import_qt():
         )
         # PySide6/Qt6: QAction se movió de QtWidgets → QtGui
         from PySide6.QtGui import (
+            QGuiApplication,
             QAction, QKeySequence,
             QColor, QFont, QFontDatabase, QIcon, QPalette,
             QPainter, QPen, QBrush,
@@ -39,11 +53,13 @@ def _import_qt():
             QDragEnterEvent, QDropEvent,
         )
         from PySide6.QtCore import (
-            Qt, QObject, QEvent, QThread, Signal, QTimer,
+            Qt, QObject, QEvent, QThread, Signal, QTimer, QByteArray, QSize,
             QSettings, QMimeData, QRectF, QPointF,
             QLocale, QTranslator, QLibraryInfo,
         )
-        return "PySide6", locals()
+        ns = locals()
+        ns["QSvgRenderer"] = _optional_svg("PySide6")
+        return "PySide6", ns
     except ImportError as e:
         errors.append(f"PySide6: {e}")
 
@@ -65,6 +81,7 @@ def _import_qt():
             QMenu, QAction, QSystemTrayIcon,
         )
         from PySide2.QtGui import (
+            QGuiApplication,
             QKeySequence,
             QColor, QFont, QFontDatabase, QIcon, QPalette,
             QPainter, QPen, QBrush,
@@ -73,11 +90,13 @@ def _import_qt():
             QDragEnterEvent, QDropEvent,
         )
         from PySide2.QtCore import (
-            Qt, QObject, QEvent, QThread, Signal, QTimer,
+            Qt, QObject, QEvent, QThread, Signal, QTimer, QByteArray, QSize,
             QSettings, QMimeData, QRectF, QPointF,
             QLocale, QTranslator, QLibraryInfo,
         )
-        return "PySide2", locals()
+        ns = locals()
+        ns["QSvgRenderer"] = _optional_svg("PySide2")
+        return "PySide2", ns
     except ImportError as e:
         errors.append(f"PySide2: {e}")
 

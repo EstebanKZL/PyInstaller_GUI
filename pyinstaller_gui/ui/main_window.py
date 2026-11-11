@@ -7,7 +7,7 @@ import time
 from datetime import datetime
 from pathlib import Path
 
-from .. import APP_DEVELOPER, APP_NAME, APP_URL, APP_VERSION
+from .. import APP_DEVELOPER, APP_NAME, APP_VERSION
 from ..core.command import build_command, build_spec
 from ..core.config import BACKEND_LABELS, BACKENDS, BuildConfig
 from ..core.errors import COMMON_ERRORS
@@ -18,7 +18,7 @@ from ..core.requirements import parse_requirement_full
 from ..core.trust import add_trusted, needs_confirmation
 from ..i18n import LANGUAGES, tr
 from ..qt_compat import (
-    _QT_BACKEND, QAction, QApplication, QButtonGroup, QCheckBox, QColor, QComboBox, QDialog, QFileDialog,
+    QAction, QApplication, QButtonGroup, QCheckBox, QColor, QComboBox, QDialog, QFileDialog,
     QFrame, QGridLayout, QGroupBox, QHBoxLayout, QInputDialog, QKeySequence, QLabel, QLineEdit, QListWidget,
     QListWidgetItem, QMainWindow, QMenu, QMessageBox, QProgressBar, QPushButton, QScrollArea, QSettings,
     QSplitter, QSystemTrayIcon, QTabWidget, QTextCursor, QTextEdit, QTimer, QVBoxLayout, QWidget, Qt, _exec,
@@ -31,7 +31,8 @@ from .analysis_tab import AnalysisTab
 from .components import (
     make_badge, make_button, make_hint, make_label, make_section, make_tab_scroll, set_badge, set_help,
 )
-from .dialogs import PythonSelectorDialog
+from .dialogs import AboutDialog, PythonSelectorDialog
+from .icons import ACTION_ICONS, icon
 from .distribution_tab import DistributionTab
 from .language import get_lang_code, set_lang_code
 from .theme import SETTINGS_ORG, SP, THEME, get_theme_name, set_theme_name
@@ -374,6 +375,8 @@ class BuilderApp(QMainWindow):
     # ── Menús ────────────────────────────────────────────────────────────
     def _action(self, text_key, slot, help_key=None, shortcut=None, menu=None):
         act = QAction(tr(text_key), self)
+        if help_key in ACTION_ICONS:
+            act.setIcon(icon(ACTION_ICONS[help_key]))
         if shortcut:
             act.setShortcut(QKeySequence(shortcut))
             act.setShortcutContext(Qt.WindowShortcut)
@@ -453,9 +456,7 @@ class BuilderApp(QMainWindow):
                                 tr("msg.theme_changed", theme=tr(f"theme.{new}"), app=APP_NAME))
 
     def _show_about(self):
-        QMessageBox.about(self, tr("msg.about_title", app=APP_NAME),
-                          tr("msg.about_body", app=APP_NAME, version=APP_VERSION, dev=APP_DEVELOPER,
-                             url=APP_URL, backend=_QT_BACKEND))
+        _exec(AboutDialog(self))
 
     def _show_shortcuts(self):
         QMessageBox.information(self, tr("msg.shortcuts_title"), tr("msg.shortcuts_body"))
@@ -468,7 +469,7 @@ class BuilderApp(QMainWindow):
             empty.setEnabled(False)
             return
         for path in recent:
-            act = self.recent_menu.addAction(path)
+            act = self.recent_menu.addAction(icon("folder"), path)
             act.triggered.connect(lambda checked=False, p=path: self._open_recent(p))
 
     def _confirm_reset(self):
@@ -875,6 +876,7 @@ class BuilderApp(QMainWindow):
         self.log_search = QLineEdit()
         self.log_search.setPlaceholderText(tr("ph.log_search"))
         self.log_search.setMinimumWidth(260)
+        self.log_search.addAction(icon("search", "text_muted"), QLineEdit.LeadingPosition)
         self.log_search.returnPressed.connect(lambda: self._find_in_log(False))
         set_help(self.log_search, "log_search", "Ctrl+F")
         self.log_search_count = make_label("", "lblHint")
@@ -950,11 +952,11 @@ class BuilderApp(QMainWindow):
     def _show_recent_menu(self):
         recent = self._load_recent()
         if not recent:
-            QMessageBox.information(self, "Sin recientes", "No hay proyectos recientes.")
+            QMessageBox.information(self, tr("menu.recent"), tr("menu.recent_empty"))
             return
         m = QMenu(self)
         for path in recent:
-            a = QAction(path, self)
+            a = QAction(icon("folder"), path, self)
             a.triggered.connect(lambda ch, p=path: self._open_recent(p))
             m.addAction(a)
         _exec_menu(m, self._btn_recent.mapToGlobal(self._btn_recent.rect().bottomLeft()))   # FIX V4.2.0

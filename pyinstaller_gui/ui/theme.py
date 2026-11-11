@@ -318,6 +318,9 @@ QPushButton#btnStop:disabled, QPushButton#btnDisconnect:disabled {{
     background-color: {t['disabled_bg']}; color: {t['disabled_text']}; border-color: {t['border']};
 }}
 
+/* Botones con ícono: el ícono va a la izquierda con aire */
+QPushButton[hasIcon="true"] {{ padding-left: 10px; }}
+
 QPushButton#btnSecondary, QPushButton#btnGhost {{
     background-color: {t['accent_soft']};
     border: 1px solid {t['accent_border']};
@@ -545,7 +548,6 @@ QTabBar::tab:selected {{
     background-color: {t['bg']};
     color: {t['text']};
     border-top: 2px solid {t['accent']};
-    font-weight: 600;
 }}
 QTabBar::tab:disabled {{ color: {t['disabled_text']}; }}
 /* El contenido desplazable de cada pestaña deja ver el fondo del panel */

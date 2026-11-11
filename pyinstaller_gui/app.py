@@ -22,7 +22,7 @@ def run_gui():
         input("Presioná Enter para salir...")
         return 1
     from . import APP_NAME, APP_VERSION
-    from .i18n import check_translations, set_language
+    from .i18n import check_translations, set_language, tr
     from .ui.theme import migrate_legacy_settings
 
     # 1) Preferencias de V4.4.0 → QSettings("EstebanKZL", APP_NAME), una sola vez
@@ -58,6 +58,18 @@ def run_gui():
             QApplication.setAttribute(Qt.AA_EnableHighDpiScaling, True)
         if hasattr(Qt, "AA_UseHighDpiPixmaps"):
             QApplication.setAttribute(Qt.AA_UseHighDpiPixmaps, True)
+
+    # Registro a archivo y errores no controlados: se anotan y se muestran sin cerrar el programa
+    from .applog import install_excepthook, log_path, setup_logging
+    setup_logging(_QT_BACKEND)
+
+    def _show_unexpected(error, details):
+        from .qt_compat import QMessageBox
+        box = QMessageBox(QMessageBox.Critical, tr("msg.unexpected_title"),
+                          tr("msg.unexpected_body", error=error, path=log_path() or "-"))
+        box.setDetailedText(details)
+        _exec(box)
+    install_excepthook(_show_unexpected)
 
     app = QApplication(sys.argv)
     app.setStyle("Fusion")

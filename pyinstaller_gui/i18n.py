@@ -226,10 +226,27 @@ _TEXTS = {
                        "All fields and options in this window will be cleared. "
                        "Project files are not touched.\n\nContinue?"),
     "msg.about_title": ("Acerca de {app}", "About {app}"),
-    "msg.about_body": ("{app} {version}\n\nCompilador visual para PyInstaller con análisis de dependencias, "
-                       "instaladores, firma de código y GitHub Actions.\n\n{dev}\n{url}\n\nQt: {backend}",
-                       "{app} {version}\n\nVisual builder for PyInstaller with dependency analysis, installers, "
-                       "code signing and GitHub Actions.\n\n{dev}\n{url}\n\nQt: {backend}"),
+    "about.version": ("Versión {version}", "Version {version}"),
+    "about.description": ("Compilador visual para PyInstaller y Nuitka: análisis de dependencias, instaladores, "
+                          "firma de código, paquetes de release y GitHub Actions.",
+                          "Visual builder for PyInstaller and Nuitka: dependency analysis, installers, code "
+                          "signing, release packages and GitHub Actions."),
+    "about.developer": ("Desarrollador", "Developer"),
+    "about.repo": ("Repositorio", "Repository"),
+    "about.system": ("Sistema", "System"),
+    "about.log": ("Registro", "Log file"),
+    "about.copy": ("Copiar datos del sistema", "Copy system info"),
+    "about.copied": ("Copiado", "Copied"),
+    "about.close": ("Cerrar", "Close"),
+    "tip.about_copy": ("Copia la versión, el sistema y la ruta del registro para adjuntarlos al reportar un "
+                       "problema.",
+                       "Copies the version, system and log path to attach them when reporting a problem."),
+    "tip.about_close": ("Cierra esta ventana.", "Closes this window."),
+    "msg.unexpected_title": ("Error inesperado", "Unexpected error"),
+    "msg.unexpected_body": ("Ocurrió un error que el programa no esperaba:\n\n{error}\n\n"
+                            "Quedó registrado en {path}. El programa sigue abierto.",
+                            "An error the program did not expect occurred:\n\n{error}\n\n"
+                            "It was recorded in {path}. The program stays open."),
     "msg.shortcuts_title": ("Atajos de teclado", "Keyboard shortcuts"),
     "msg.shortcuts_body": ("Ctrl+B  Compilar\nEsc  Cancelar compilación\nCtrl+S  Guardar perfil\n"
                            "Ctrl+O  Cargar perfil\nCtrl+F  Buscar en el log\nF5  Verificar dependencias\n"
