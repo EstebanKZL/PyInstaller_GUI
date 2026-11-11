@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyinstaller-gui-pro"
+version = "5.1.0"
+description = "Compilador visual para PyInstaller (PySide6 / PySide2)"
+authors = [{ name = "EstebanKZL" }]
+urls = { Homepage = "https://github.com/EstebanKZL/PyInstaller_GUI" }
+requires-python = ">=3.8"
+dependencies = [
+    'PySide6>=6.11.0; python_version >= "3.10"',
+    'PySide2>=5.15.2.1; python_version < "3.10"',
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "ruff>=0.5", "pyinstaller>=6"]
+
+[project.scripts]
+pyinstaller-gui = "pyinstaller_gui.app:main"
+
+[tool.setuptools.packages.find]
+include = ["pyinstaller_gui*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["slow: compila ejecutables reales con PyInstaller (lento)"]
+
+[tool.ruff]
+line-length = 130
+target-version = "py38"
+
+[tool.ruff.lint]
+# Errores reales (pyflakes, sintaxis) y bugs probables; sin reglas de estilo
+select = ["F", "E9", "B006", "B008"]
+ignore = ["F811"]
+
+[tool.ruff.lint.per-file-ignores]
+# qt_compat importa en try/except PySide6 → PySide2 y re-exporta por nombre
+"pyinstaller_gui/qt_compat.py" = ["F401"]

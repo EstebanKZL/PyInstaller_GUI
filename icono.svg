@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <!-- Gradientes de Fondo -->
+    <linearGradient id="bg_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A1B26"/>
+      <stop offset="100%" stop-color="#0B0B0F"/>
+    </linearGradient>
+
+    <!-- Gradiente del Cristal (Glassmorphism) -->
+    <linearGradient id="glass_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="rgba(31, 35, 53, 0.75)"/>
+      <stop offset="100%" stop-color="rgba(22, 22, 30, 0.9)"/>
+    </linearGradient>
+
+    <!-- Reflejo superior del cristal -->
+    <linearGradient id="glass_shine" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="rgba(255, 255, 255, 0.15)"/>
+      <stop offset="25%" stop-color="rgba(255, 255, 255, 0.0)"/>
+    </linearGradient>
+
+    <!-- Filtros de desenfoque y resplandor -->
+    <filter id="blur_bg" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="75"/>
+    </filter>
+
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="25" stdDeviation="25" flood-color="#000000" flood-opacity="0.8"/>
+    </filter>
+  </defs>
+
+  <!-- 1. Fondo Principal (App Icon Squircle) -->
+  <rect x="40" y="40" width="944" height="944" rx="220" ry="220" fill="url(#bg_grad)" stroke="#2A2B3D" stroke-width="8"/>
+  <!-- Bisel interior para efecto 3D -->
+  <rect x="44" y="44" width="936" height="936" rx="216" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="4"/>
+
+  <!-- 2. Orbes Luminosos de Fondo (Efecto Bokeh) -->
+  <g filter="url(#blur_bg)">
+    <!-- Orbe Python Azul -->
+    <circle cx="280" cy="350" r="230" fill="#3B82F6" opacity="0.45" />
+    <!-- Orbe EXE Morado -->
+    <circle cx="750" cy="650" r="230" fill="#BB9AF7" opacity="0.35" />
+    <!-- Orbe Naranja/PRO -->
+    <circle cx="700" cy="300" r="180" fill="#E0AF68" opacity="0.3" />
+    <!-- Orbe Verde Compilación -->
+    <circle cx="350" cy="700" r="160" fill="#9ECE6A" opacity="0.25" />
+  </g>
+
+  <!-- 3. Ventana de Cristal (La Interfaz del PRO Builder) -->
+  <g filter="url(#shadow)">
+    <!-- Panel de Cristal -->
+    <rect x="132" y="280" width="760" height="480" rx="25" fill="url(#glass_grad)" stroke="#414868" stroke-width="3"/>
+    <!-- Brillo del Cristal -->
+    <rect x="132" y="280" width="760" height="480" rx="25" fill="url(#glass_shine)"/>
+
+    <!-- Barra Superior de la Terminal -->
+    <path d="M 132 305 Q 132 280 157 280 L 867 280 Q 892 280 892 305 L 892 340 L 132 340 Z" fill="#13131C" />
+    
+    <!-- Botones estilo macOS -->
+    <circle cx="180" cy="310" r="9" fill="#F7768E" />
+    <circle cx="215" cy="310" r="9" fill="#E0AF68" />
+    <circle cx="250" cy="310" r="9" fill="#9ECE6A" />
+
+    <!-- Título de la ventana -->
+    <text x="512" y="317" font-family="'Segoe UI', sans-serif" font-size="16" font-weight="bold" fill="#565F89" text-anchor="middle" letter-spacing="2">PRO_BUILDER_GUI</text>
+  </g>
+
+  <!-- 4. Contenido Interior (El Proceso) -->
+
+  <!-- A) Script Python (.py) a la Izquierda -->
+  <g transform="translate(190, 410)" filter="url(#shadow)">
+    <!-- Forma del archivo con esquina doblada -->
+    <path d="M 15 0 L 75 0 L 130 55 L 130 160 Q 130 175 115 175 L 15 175 Q 0 175 0 160 L 0 15 Q 0 0 15 0 Z" fill="#1A1B26" stroke="#3B82F6" stroke-width="5"/>
+    <path d="M 75 0 L 130 55 L 75 55 Z" fill="#3B82F6"/>
+    <!-- Texto .py -->
+    <text x="65" y="118" font-family="'Segoe UI', sans-serif" font-size="46" font-weight="900" fill="#C0CAF5" text-anchor="middle">.py</text>
+  </g>
+
+  <!-- B) Motor de Compilación (Centro) -->
+  <g transform="translate(512, 495)">
+    <!-- Engranaje / Matriz de fondo -->
+    <circle cx="0" cy="0" r="70" fill="none" stroke="#2A2B3D" stroke-width="14" stroke-dasharray="20 18"/>
+    <circle cx="0" cy="0" r="45" fill="none" stroke="#414868" stroke-width="6"/>
+
+    <!-- Flechas de Compilación Brillantes -->
+    <g filter="url(#glow)">
+      <path d="M -25 -25 L 5 0 L -25 25" fill="none" stroke="#9ECE6A" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M 5 -25 L 35 0 L 5 25" fill="none" stroke="#9ECE6A" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </g>
+
+  <!-- C) Aplicación Ejecutable (.EXE) a la Derecha -->
+  <g transform="translate(700, 420)" filter="url(#shadow)">
+    <!-- Base de la ventana de la App -->
+    <rect x="0" y="0" width="140" height="150" rx="15" fill="#152040" stroke="#BB9AF7" stroke-width="5"/>
+    <!-- Barra superior de la App -->
+    <path d="M 0 15 Q 0 0 15 0 L 125 0 Q 140 0 140 15 L 140 38 L 0 38 Z" fill="#BB9AF7"/>
+    <circle cx="22" cy="19" r="5" fill="#152040" opacity="0.6"/>
+    <circle cx="40" cy="19" r="5" fill="#152040" opacity="0.6"/>
+    <!-- Texto EXE -->
+    <text x="70" y="108" font-family="'Segoe UI', sans-serif" font-size="40" font-weight="900" fill="#FFFFFF" text-anchor="middle">EXE</text>
+  </g>
+
+  <!-- 5. Barra de Progreso (Abajo) -->
+  <g transform="translate(190, 670)">
+    <!-- Fondo de la barra -->
+    <rect x="0" y="0" width="644" height="22" rx="11" fill="#16161E" stroke="#2A2B3D" stroke-width="3"/>
+    <!-- Progreso Lleno (Azul brillante) -->
+    <rect x="0" y="0" width="480" height="22" rx="11" fill="#7AA2F7" filter="url(#glow)"/>
+    <!-- Porcentaje -->
+    <text x="605" y="-12" font-family="'Segoe UI', monospace" font-size="16" font-weight="bold" fill="#7AA2F7">Building... 75%</text>
+  </g>
+
+  <!-- 6. Etiqueta PRO Dorada (Arriba a la derecha) -->
+  <g transform="translate(790, 255)" filter="url(#shadow)">
+    <rect x="0" y="0" width="85" height="38" rx="8" fill="#E0AF68" stroke="#13131C" stroke-width="4"/>
+    <text x="42" y="26" font-family="'Segoe UI', sans-serif" font-size="18" font-weight="900" fill="#13131C" text-anchor="middle" letter-spacing="1">PRO</text>
+  </g>
+
+  <!-- Detalles técnicos (Partículas flotantes) -->
+  <circle cx="270" cy="590" r="4" fill="#7AA2F7" opacity="0.7"/>
+  <path d="M 640 390 h 12 M 646 384 v 12" stroke="#BB9AF7" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+</svg>

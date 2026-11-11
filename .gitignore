@@ -1,0 +1,40 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+.venv/
+venv/
+
+# Salidas de PyInstaller
+build/
+dist/
+*.spec
+
+# Paquetes generados por release/build_release.py
+release_out/
+
+# Secretos y configuración local (nunca se suben)
+.env
+.env.*
+*.key
+*.pem
+*.pfx
+*.p12
+*.log
+
+# Sistema operativo y editor
+Thumbs.db
+desktop.ini
+.DS_Store
+.idea/
+.vscode/
+
+# Archivos de asistentes de IA (uso interno, no se publican)
+CLAUDE.md
+CLAUDE.local.md
+.claude/
+.cursor/
+.cursorrules
+AGENTS.md
+GEMINI.md

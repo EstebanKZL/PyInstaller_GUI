@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    name: ${{ matrix.os }} · Python ${{ matrix.python }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python: ["3.10", "3.13"]
+        include:
+          # Python 3.8 + PySide2 (Qt 5): la combinación de los paquetes para Windows 7/8 y 32 bits
+          - os: windows-latest
+            python: "3.8"
+    env:
+      QT_QPA_PLATFORM: offscreen
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Librerías de sistema para Qt (Linux)
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libegl1 libxkbcommon0 libgl1 libfontconfig1 libdbus-1-3
+
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt pytest ruff pyinstaller pyyaml
+
+      - name: Lint (ruff)
+        run: python -m ruff check .
+
+      - name: Tests rápidos
+        run: python -m pytest -q -m "not slow"
+
+      - name: Tests de build real (PyInstaller)
+        run: python -m pytest -q -m slow
